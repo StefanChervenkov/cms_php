@@ -53,7 +53,7 @@ if ($results === false) {
                         </h2>
                         <p>
                             <?= $article['content'] ?>
-                        </p>
+                        </p> <hr>
                     </li>
                 <?php endforeach; ?>
             </ul>
