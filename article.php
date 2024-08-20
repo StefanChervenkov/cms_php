@@ -22,7 +22,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 ?>
 
-<?php require 'header.php'; ?>
+<?php require './includes/header.php'; ?>
 
 <?php
 if (empty($article)):
@@ -37,4 +37,4 @@ if (empty($article)):
     </p>
 <?php endif; ?>
 
-<?php require 'footer.php';
+<?php require './includes/footer.php';

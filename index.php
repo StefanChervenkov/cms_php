@@ -1,6 +1,6 @@
 <?php
 
-require 'database.php';
+require './database.php';
 
 if (mysqli_connect_error()) {
     echo mysqli_connect_error();
@@ -20,7 +20,7 @@ if ($results === false) {
 
 ?>
 
-<?php require 'header.php'; ?>
+<?php require './includes/header.php'; ?>
 
 <?php
 if (empty($articles)):
@@ -44,4 +44,4 @@ if (empty($articles)):
     </ul>
 <?php endif; ?>
 
-<?php require 'footer.php'; 
+<?php require './includes/footer.php'; 
