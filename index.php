@@ -1,18 +1,12 @@
 <?php
 
-$db_host = 'localhost';
-$db_name = 'cms';
-$db_user = 'cms_admin';
-$db_password = '9[[z6h9)8b/RiBTF';
-
-$con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+require 'database.php';
 
 if (mysqli_connect_error()) {
     echo mysqli_connect_error();
     exit;
 }
 
-//echo '<h1>Connected successfully!</h1>';
 
 $sql = 'SELECT * FROM article ORDER BY published_at';
 
@@ -26,43 +20,28 @@ if ($results === false) {
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php require 'header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-</head>
+<?php
+if (empty($articles)):
+?>
+    <h2>No articles found</h2>
+<?php else: ?>
+    <ul>
+        <?php foreach ($articles as $article): ?>
+            <li>
+                <h2>
+                    <a href="article.php?id=<?= $article['id'] ?>">
+                        <?= $article['title'] ?>
+                    </a>
+                </h2>
+                <p>
+                    <?= $article['content'] ?>
+                </p>
+                <hr>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>
 
-<body>
-    <header>
-        <h1>My Blog</h1>
-    </header>
-    <main>
-        <?php
-        if (empty($articles)):
-        ?>
-            <h2>No articles found</h2>
-        <?php else: ?>
-            <ul>
-                <?php foreach ($articles as $article): ?>
-                    <li>
-                        <h2>
-                            <a href="article.php?id=<?= $article['id'] ?>">
-                                <?= $article['title'] ?>
-                            </a>
-                        </h2>
-                        <p>
-                            <?= $article['content'] ?>
-                        </p>
-                        <hr>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </main>
-
-</body>
-
-</html>
+<?php require 'footer.php'; 

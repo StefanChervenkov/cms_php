@@ -1,11 +1,6 @@
 <?php
 
-$db_host = 'localhost';
-$db_name = 'cms';
-$db_user = 'cms_admin';
-$db_password = '9[[z6h9)8b/RiBTF';
-
-$con = mysqli_connect($db_host, $db_user, $db_password, $db_name);
+require 'database.php';
 
 if (mysqli_connect_error()) {
     echo mysqli_connect_error();
@@ -25,42 +20,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 } else {
     $article = null;
 }
-
-
-
-
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
+<?php require 'header.php'; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Blog</title>
-</head>
+<?php
+if (empty($article)):
+?>
+    <h2>Article not found.</h2>
+<?php else: ?>
+    <h2>
+        <?= $article['title']; ?>
+    </h2>
+    <p>
+        <?= $article['content']; ?>
+    </p>
+<?php endif; ?>
 
-<body>
-    <header>
-        <h1>My Blog</h1>
-    </header>
-    <main>
-        <?php
-        if (empty($article)):
-        ?>
-            <h2>Article not found.</h2>
-        <?php else: ?>
-            <h2>
-                <?= $article['title']; ?>
-            </h2>
-            <p>
-                <?= $article['content']; ?>
-            </p>
-        <?php endif;
-        ?>
-
-    </main>
-
-</body>
-
-</html>
+<?php require 'footer.php';
