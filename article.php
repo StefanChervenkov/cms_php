@@ -14,7 +14,7 @@ if (mysqli_connect_error()) {
 
 //echo '<h1>Connected successfully!</h1>';
 
-$sql = 'SELECT * FROM article WHERE id = 1';
+$sql = "SELECT * FROM article WHERE id = {$_GET['id']}";
 
 $result = mysqli_query($con, $sql);
 

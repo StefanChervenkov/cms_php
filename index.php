@@ -49,11 +49,14 @@ if ($results === false) {
                 <?php foreach ($articles as $article): ?>
                     <li>
                         <h2>
-                            <?= $article['title'] ?>
+                            <a href="article.php?id=<?= $article['id'] ?>">
+                                <?= $article['title'] ?>
+                            </a>
                         </h2>
                         <p>
                             <?= $article['content'] ?>
-                        </p> <hr>
+                        </p>
+                        <hr>
                     </li>
                 <?php endforeach; ?>
             </ul>
