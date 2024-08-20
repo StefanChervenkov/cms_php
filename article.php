@@ -12,17 +12,22 @@ if (mysqli_connect_error()) {
     exit;
 }
 
-//echo '<h1>Connected successfully!</h1>';
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $sql = "SELECT * FROM article WHERE id = " . $_GET['id'];
 
-$sql = "SELECT * FROM article WHERE id = {$_GET['id']}";
+    $result = mysqli_query($con, $sql);
 
-$result = mysqli_query($con, $sql);
-
-if ($result === false) {
-    echo mysqli_error($con);
+    if ($result === false) {
+        echo mysqli_error($con);
+    } else {
+        $article = mysqli_fetch_assoc($result);
+    }
 } else {
-    $article = mysqli_fetch_assoc($result);
+    $article = null;
 }
+
+
+
 
 ?>
 
@@ -51,9 +56,9 @@ if ($result === false) {
             <p>
                 <?= $article['content']; ?>
             </p>
-        <?php endif; 
+        <?php endif;
         ?>
-        
+
     </main>
 
 </body>
