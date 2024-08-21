@@ -1,6 +1,28 @@
 <?php
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    require './database.php';
+
+    if (mysqli_connect_error()) {
+        echo mysqli_connect_error();
+        exit;
+    }
+
+    $sql = "INSERT INTO `article`(`title`, `content`, `published_at`) VALUES ('{$_POST['title']}', '{$_POST['content']}', '{$_POST['published_at']}')";
     
+    //$sql = "INSERT INTO article (title, content, published_at) VALUES ('" . $_POST['title'] . "', '" . $_POST['content'] . "', '" . $_POST['published_at'] . "')";
+
+    $result = mysqli_query($con, $sql);
+
+    if ($result === false) {
+        echo mysqli_error($con);
+    } else {
+        $id = mysqli_insert_id($con);
+        echo "The inserted article has ID: {$id}";
+    }
+    
+}
 
 ?>
 
@@ -22,7 +44,7 @@
 
 <h2>New Article</h2>
 
-<form  method="post">
+<form method="post">
 
     <div class="mb-3">
         <label for="title" class="form-label">Title</label>
