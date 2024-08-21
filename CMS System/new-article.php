@@ -4,24 +4,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     require './database.php';
 
-    if (mysqli_connect_error()) {
-        echo mysqli_connect_error();
-        exit;
-    }
+    $sql = "INSERT INTO article (title, content, published_at)
+            VALUES (?, ?, ?)";
 
-    $sql = "INSERT INTO article (title, content, published_at) VALUES ('{$_POST['title']}', '{$_POST['content']}', '{$_POST['published_at']}')";
-    
-    //$sql = "INSERT INTO article (title, content, published_at) VALUES ('" . $_POST['title'] . "', '" . $_POST['content'] . "', '" . $_POST['published_at'] . "')";
+    $stm = mysqli_prepare($con, $sql);
 
-    $result = mysqli_query($con, $sql);
-
-    if ($result === false) {
+    if ($stm === false) {
         echo mysqli_error($con);
     } else {
-        $id = mysqli_insert_id($con);
-        echo "The inserted article has ID: {$id}";
+        mysqli_stmt_bind_param($stmt, "sss", $_POST['title'], $_POST['content'], $_POST['published_at']);
+
+        if (mysqli_stmt_execute($stmt)) {
+
+            $id = mysqli_insert_id($conn);
+            echo "Inserted record with ID: $id";
+        } else {
+
+            echo mysqli_stmt_error($stmt);
+        }
     }
-    
 }
 
 ?>
