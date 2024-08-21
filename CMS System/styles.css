@@ -1,0 +1,22 @@
+form {
+    padding: 20px;
+    border: solid rgb(81, 81, 81);
+    border-radius: 20px;
+    margin: 20px;   
+}
+.form-label {
+    font-size: medium;
+    font-weight: bold;
+}
+
+#title {
+    max-width: 30%
+}
+
+#content {
+    max-width: 90%;
+}
+
+#published_at {
+    max-width: 20%;
+}
