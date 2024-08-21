@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
 
-    $sql = "INSERT INTO `article`(`title`, `content`, `published_at`) VALUES ('{$_POST['title']}', '{$_POST['content']}', '{$_POST['published_at']}')";
+    $sql = "INSERT INTO article (title, content, published_at) VALUES ('{$_POST['title']}', '{$_POST['content']}', '{$_POST['published_at']}')";
     
     //$sql = "INSERT INTO article (title, content, published_at) VALUES ('" . $_POST['title'] . "', '" . $_POST['content'] . "', '" . $_POST['published_at'] . "')";
 
